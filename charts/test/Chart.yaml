@@ -22,5 +22,9 @@ version: 1.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+home: https://github.com/hajowieland/charts
+maintainers:
+  - name: hajowieland
+    email: mail@wieland.tech
 annotations:
   artifacthub.io/changes: "[]"
