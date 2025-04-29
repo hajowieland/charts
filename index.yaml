@@ -5,6 +5,18 @@ entries:
       artifacthub.io/changes: '[]'
     apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-04-29T14:10:42.874944278Z"
+    description: A Helm chart for Kubernetes
+    digest: e73b90926a1fc75c8312e57e7d7134acd45cd7d469cebd150531627526b8a9d7
+    name: test
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/test-1.0.0/test-1.0.0.tgz
+    version: 1.0.0
+  - annotations:
+      artifacthub.io/changes: '[]'
+    apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-04-29T13:16:50.204507936Z"
     description: A Helm chart for Kubernetes
     digest: 31a829899d61c0e916027562d76c23233114998303cf83989fc8111c09a152d5
@@ -13,4 +25,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/test-0.1.0/test-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-29T13:16:50.204519358Z"
+generated: "2025-04-29T14:10:42.874965518Z"
