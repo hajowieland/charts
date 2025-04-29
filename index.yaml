@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  test:
+  - annotations:
+      artifacthub.io/changes: '[]'
+    apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-04-29T13:16:50.204507936Z"
+    description: A Helm chart for Kubernetes
+    digest: 31a829899d61c0e916027562d76c23233114998303cf83989fc8111c09a152d5
+    name: test
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/test-0.1.0/test-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-04-29T13:16:50.204519358Z"
