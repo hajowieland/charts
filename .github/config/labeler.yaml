@@ -11,3 +11,6 @@ etcd-druid-certs:
 miniflux:
 - changed-files:
   - any-glob-to-any-file: charts/miniflux/*
+test:
+- changed-files:
+  - any-glob-to-any-file: charts/test/*
