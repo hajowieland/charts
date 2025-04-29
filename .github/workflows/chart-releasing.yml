@@ -35,9 +35,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Add Helm repositories
-#        run: |
-#          helm repo add hajowieland https://charts.wieland.tech
+      - name: Add Helm repositories
+        run: |
+          helm repo add hajowieland https://charts.wieland.tech
 
       - name: Import GPG key
         run: |

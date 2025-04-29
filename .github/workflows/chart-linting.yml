@@ -23,30 +23,30 @@ jobs:
         working-directory: ./charts
         run: ah lint
 
-#  ct-lint:
-#    runs-on: ubuntu-24.04
-#    steps:
-#      - name: checkout git repository
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#          persist-credentials: false
-#          ref: ${{ github.head_ref }}
-#
-#      - name: setup helm
-#        uses: azure/setup-helm@v4
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - uses: actions/setup-python@v5
-#        with:
-#          python-version: '3.13'
-#
-#      - name: Set up chart-testing
-#        uses: helm/chart-testing-action@v2.7.0
-#
-#      - name: Run chart-testing (lint)
-#        run: ct lint --config .github/config/chart-testing.yaml
+  ct-lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+
+      - name: setup helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.7.0
+
+      - name: Run chart-testing (lint)
+        run: ct lint --config .github/config/chart-testing.yaml
 
   helm-lint:
     runs-on: ubuntu-24.04
