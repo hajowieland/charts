@@ -11,7 +11,7 @@ These charts are provided as-is with no warranties.
 Once Helm is set up properly, add the repo as follows:
 
 ```shell
-helm repo add hajowieland https://charts.hajowieland.tech
+helm repo add hajowieland https://charts.wieland.tech
 helm repo update
 ```
 
