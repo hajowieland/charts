@@ -77,9 +77,17 @@ jobs:
 
       - name: Push Charts to GHCR
         run: |
-          for pkg in .cr-release-packages/*; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
-            helm push "${pkg}" oci://ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
-          done
+          shopt -s nullglob
+          packages=(.cr-release-packages/*.tgz)
+          shopt -u nullglob
+
+          if [ ${#packages[@]} -eq 0 ]; then
+            echo "No new/changed chart packages found in .cr-release-packages. Skipping OCI push."
+          else
+            echo "Found ${#packages[@]} chart package(s) to push:"
+            for pkg in "${packages[@]}"; do
+              echo "Pushing ${pkg}..."
+              helm push "${pkg}" oci://ghcr.io/${{ github.repository_owner }}
+            done
+            echo "OCI push completed."
+          fi
