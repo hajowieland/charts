@@ -7,6 +7,8 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,6 +53,8 @@ jobs:
   changelog:
     needs: [pre-commit]
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
       - uses: actions/checkout@v4
