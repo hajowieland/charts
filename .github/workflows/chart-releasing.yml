@@ -66,6 +66,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.7.0
         with:
           config: ./.github/config/chart-releasing.yaml
+          skip_existing: true
           skip_upload: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
