@@ -6,12 +6,6 @@
       "title": "affinity",
       "type": "object"
     },
-    "anothertest": {
-      "default": "ok",
-      "required": [],
-      "title": "anothertest",
-      "type": "string"
-    },
     "autoscaling": {
       "description": "This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/",
       "properties": {
@@ -372,12 +366,6 @@
       "title": "serviceAccount",
       "type": "object"
     },
-    "test": {
-      "default": "ok",
-      "required": [],
-      "title": "test",
-      "type": "string"
-    },
     "tolerations": {
       "items": {
         "required": []
@@ -406,8 +394,6 @@
     }
   },
   "required": [
-    "test",
-    "anothertest",
     "replicaCount",
     "image",
     "imagePullSecrets",
