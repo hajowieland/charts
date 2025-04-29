@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+        exclude: ^charts/.*/templates/
+
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: ""
+    hooks:
+      - id: helm-docs-container
+        always_run: true
+        entry: jnorwood/helm-docs:v1.14.2
+        args:
+          - --chart-search-root=charts
+
+  - repo: https://github.com/dadav/helm-schema
+    rev: ""
+    hooks:
+      - id: helm-schema-container
+        always_run: true
+        args:
+          - --append-newline
+          - --chart-search-root=charts
+          - --no-dependencies
+          - --skip-auto-generation=additionalProperties
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint
+        name: Markdownlint
+        args: [--config=.github/config/markdownlint.yaml]
+        language_version: lts

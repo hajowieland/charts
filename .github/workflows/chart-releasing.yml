@@ -1,0 +1,84 @@
+name: Chart-Releasing
+
+on:
+  workflow_call:
+    secrets:
+      GPG_PRIVATE_KEY_BASE64:
+        required: true
+      GPG_PRIVATE_KEY_PASSPHRASE:
+        required: true
+      GPG_PRIVATE_KEY_UID:
+        required: true
+  workflow_dispatch:
+
+jobs:
+  release2github:
+    permissions:
+      contents: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add Helm repositories
+        run: |
+          helm repo add hajowieland https://charts.wieland.tech
+
+      - name: Import GPG key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY_BASE64 }}" | base64 -d | gpg --dearmor --output keyring.gpg
+          echo "${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}" > passphrase-file.txt
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.7.0
+        with:
+          config: ./.github/config/chart-releasing.yaml
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_KEY: "${{ secrets.GPG_PRIVATE_KEY_UID }}"
+          CR_KEYRING: keyring.gpg
+          CR_PASSPHRASE_FILE: passphrase-file.txt
+          CR_SIGN: true
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run chart-releaser for OCI
+        uses: helm/chart-releaser-action@v1.7.0
+        with:
+          config: ./.github/config/chart-releasing.yaml
+          skip_upload: true
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_KEY: "${{ secrets.GPG_PRIVATE_KEY_UID }}"
+          CR_KEYRING: keyring.gpg
+          CR_PASSPHRASE_FILE: passphrase-file.txt
+          CR_SIGN: true
+
+      - name: Push Charts to GHCR
+        run: |
+          for pkg in .cr-release-packages/*; do
+            if [ -z "${pkg:-}" ]; then
+              break
+            fi
+            helm push "${pkg}" oci://ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
+          done

@@ -1,0 +1,72 @@
+name: Chart-Testing
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+
+  detect-changed-charts:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.get-changed-charts.outputs.matrix }}
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+
+      - name: setup helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.7.0
+
+      - name: Identify changed charts
+        id: get-changed-charts
+        run: |
+          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml | jq -c --slurp --raw-input 'split("\n")[:-1] | map({chart: .})')
+          echo "matrix=$CHANGED_CHARTS" >> $GITHUB_OUTPUT
+
+      - name: Debug matrix ouput
+        run: echo "${{ steps.get-changed-charts.outputs.matrix }}"
+
+  installation:
+    needs: detect-changed-charts
+    runs-on: ubuntu-24.04
+    if: ${{ needs.detect-changed-charts.outputs.matrix != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+
+      - name: setup helm
+        uses: azure/setup-helm@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.7.0
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.12.0
+
+      - name: Run chart-testing (install)
+        run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"
