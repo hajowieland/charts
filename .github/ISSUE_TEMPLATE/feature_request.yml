@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest an idea for this project
-title: "[name of the chart e.g. baserow] Issue Title"
+title: "[name of the chart e.g. my-chart] Issue Title"
 labels: [enhancement]
 assignees:
   - hajowieland

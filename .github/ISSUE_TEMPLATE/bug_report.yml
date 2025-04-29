@@ -1,6 +1,6 @@
 name: Bug Report
 description: Create a report about a problem in one of the Helm Charts
-title: "[name of the chart e.g. baserow] Issue Title"
+title: "[name of the chart e.g. my-chart] Issue Title"
 labels: [bug]
 assignees:
   - hajowieland
