@@ -366,6 +366,12 @@
       "title": "serviceAccount",
       "type": "object"
     },
+    "test": {
+      "default": "ok",
+      "required": [],
+      "title": "test",
+      "type": "string"
+    },
     "tolerations": {
       "items": {
         "required": []
@@ -394,6 +400,7 @@
     }
   },
   "required": [
+    "test",
     "replicaCount",
     "image",
     "imagePullSecrets",
