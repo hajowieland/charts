@@ -29,6 +29,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: [preparation, linting, kubeconform, unit-testing, testing]
     uses: ./.github/workflows/chart-releasing.yml
+    permissions:
+      contents: write
+      packages: write
     secrets:
       GPG_PRIVATE_KEY_BASE64: ${{ secrets.GPG_PRIVATE_KEY_BASE64 }}
       GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
