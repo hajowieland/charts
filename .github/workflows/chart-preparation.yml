@@ -40,6 +40,7 @@ jobs:
           fi
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git checkout ${{ github.head_ref }}
           git add .
           git commit -m "chore: auto-upgrade schema and readme"
@@ -85,6 +86,7 @@ jobs:
           fi
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git checkout ${{ github.head_ref }}
           git add .
           git commit -m "chore: auto-upgrade schema and readme"
