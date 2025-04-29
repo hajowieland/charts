@@ -6,6 +6,12 @@
       "title": "affinity",
       "type": "object"
     },
+    "anothertest": {
+      "default": "ok",
+      "required": [],
+      "title": "anothertest",
+      "type": "string"
+    },
     "autoscaling": {
       "description": "This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/",
       "properties": {
@@ -401,6 +407,7 @@
   },
   "required": [
     "test",
+    "anothertest",
     "replicaCount",
     "image",
     "imagePullSecrets",
