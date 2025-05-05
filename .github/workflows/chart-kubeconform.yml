@@ -74,7 +74,7 @@ jobs:
       - name: Run helm-kubeconform with optional CI values
         run: |
           CHART_PATH="${{ matrix.chart }}"
-          VALUES_CI_FILE="$CHART_PATH/ci/values-ci.yaml"
+          VALUES_CI_FILE="$CHART_PATH/ci/ci-values.yaml"
           EXTRA_KUBECONFORM_ARGS=""
 
           echo "Checking for kubeconform CI values file: $VALUES_CI_FILE"
