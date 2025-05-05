@@ -1,5 +1,31 @@
 apiVersion: v1
 entries:
+  etcd-druid-certs:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+    apiVersion: v2
+    created: "2025-05-05T14:28:41.499176763Z"
+    description: Create Certificates and Issuers for an etcd-druid Etcd cluster
+    digest: 6093430891ee266c732e34de9fcb82a04d1830d7e900e51597556617edba265f
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - etcd
+    - etcd-druid
+    - cert-manager
+    - certificates
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: etcd-druid-certs
+    sources:
+    - https://gardener.github.io/etcd-druid/
+    - https://github.com/gardener/etcd-druid
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/etcd-druid-certs-1.0.0/etcd-druid-certs-1.0.0.tgz
+    version: 1.0.0
   test:
   - annotations:
       artifacthub.io/changes: '[]'
@@ -41,4 +67,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/test-0.1.0/test-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-29T14:42:30.86905265Z"
+generated: "2025-05-05T14:28:41.499192052Z"
