@@ -71,5 +71,20 @@ jobs:
       - name: helm dependency update on changed chart
         run : helm dependency update ${{ matrix.chart }}
 
-      - name: helm kubeconform on changed charts
-        run : helm kubeconform --config .github/config/chart-kubeconform.yaml ${{ matrix.chart }}
+      - name: Run helm-kubeconform with optional CI values
+        run: |
+          CHART_PATH="${{ matrix.chart }}"
+          VALUES_CI_FILE="$CHART_PATH/ci/values-ci.yaml"
+          EXTRA_KUBECONFORM_ARGS=""
+
+          echo "Checking for kubeconform CI values file: $VALUES_CI_FILE"
+          if [[ -f "$VALUES_CI_FILE" ]]; then
+            echo "CI values file '$VALUES_CI_FILE' found. Adding --values argument."
+            EXTRA_KUBECONFORM_ARGS="--values \"$VALUES_CI_FILE\""
+          else
+            echo "CI values file '$VALUES_CI_FILE' not found. Proceeding without it."
+          fi
+
+          echo "Running helm kubeconform for chart '$CHART_PATH' with extra args: $EXTRA_KUBECONFORM_ARGS"
+          bash -c "helm kubeconform --config .github/config/chart-kubeconform.yaml '$CHART_PATH' $EXTRA_KUBECONFORM_ARGS"
+        shell: bash # Ensure bash is used for the [[ -f ]] conditional and command execution
