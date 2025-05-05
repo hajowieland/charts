@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.etcdName }}-etcd-peer-ca
+  labels:
+    {{- include "etcd-druid-certs.labels" . | nindent 4 }}
+spec:
+  isCA: true
+  usages:
+  - "signing"
+  - "key encipherment"
+  - "cert sign"
+  commonName: {{ .Values.etcdName }}-etcd-peer-ca
+  subject:
+    organizations:
+      {{ toYaml .Values.subject.organizations }}
+    organizationalUnits:
+      {{ toYaml .Values.subject.organizationalUnits }}
+  secretName: {{ .Values.etcdName }}-etcd-peer-ca-tls
+  privateKey:
+    algorithm: {{ .Values.privateKey.algorithm }}
+    size: {{ .Values.privateKey.size }}
+  issuerRef:
+    name: {{ .Values.etcdName }}-etcd-selfsigning-issuer
+    kind: Issuer
+    group: cert-manager.io

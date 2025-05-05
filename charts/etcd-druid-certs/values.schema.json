@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "etcdName": {
+      "default": "",
+      "description": "Set the name for the desired Etcd cluster - will be used in cert SANs",
+      "required": [],
+      "title": "etcdName",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "privateKey": {
+      "description": "Certicate algorithm and size to be used in the private keys",
+      "properties": {
+        "algorithm": {
+          "default": "RSA",
+          "required": [],
+          "title": "algorithm",
+          "type": "string"
+        },
+        "size": {
+          "default": 4096,
+          "required": [],
+          "title": "size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "algorithm",
+        "size"
+      ],
+      "title": "privateKey",
+      "type": "object"
+    },
+    "replicas": {
+      "default": 3,
+      "description": "Replicas of the Etcd cluster",
+      "required": [],
+      "title": "replicas",
+      "type": "integer"
+    },
+    "subject": {
+      "description": "Personalize the subject field in the certificates",
+      "properties": {
+        "organizationalUnits": {
+          "items": {
+            "anyOf": [
+              {
+                "required": [],
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "organizationalUnits",
+          "type": "array"
+        },
+        "organizations": {
+          "items": {
+            "anyOf": [
+              {
+                "required": [],
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "organizations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "organizations",
+        "organizationalUnits"
+      ],
+      "title": "subject",
+      "type": "object"
+    }
+  },
+  "required": [
+    "etcdName",
+    "replicas",
+    "privateKey",
+    "subject"
+  ],
+  "type": "object"
+}

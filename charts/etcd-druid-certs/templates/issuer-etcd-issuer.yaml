@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ .Values.etcdName }}-etcd-issuer
+  labels:
+    {{- include "etcd-druid-certs.labels" . | nindent 4 }}
+spec:
+  ca:
+    secretName: {{ .Values.etcdName }}-etcd-ca-tls

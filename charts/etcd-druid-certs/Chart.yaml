@@ -1,0 +1,21 @@
+apiVersion: v2
+name: etcd-druid-certs
+description: Create Certificates and Issuers for an etcd-druid Etcd cluster
+type: application
+version: 1.0.0
+home: https://github.com/hajowieland/charts
+keywords:
+  - etcd
+  - etcd-druid
+  - cert-manager
+  - certificates
+maintainers:
+  - name: hajowieland
+    email: mail@wieland.tech
+sources:
+  - https://gardener.github.io/etcd-druid/
+  - https://github.com/gardener/etcd-druid
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial commit of Chart

@@ -1,0 +1,17 @@
+# -- Set the name for the desired Etcd cluster - will be used in cert SANs
+etcdName: "test"
+
+# -- Replicas of the Etcd cluster
+replicas: 3
+
+# -- Certicate algorithm and size to be used in the private keys
+privateKey:
+  algorithm: RSA
+  size: 4096
+
+# -- Personalize the subject field in the certificates
+subject:
+  organizations:
+    - ACME Org
+  organizationalUnits:
+    - Kind
