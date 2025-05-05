@@ -68,5 +68,56 @@ jobs:
       - name: Create kind cluster
         uses: helm/kind-action@v1.12.0
 
+      - name: Prepare Chart CI Environment (Execute ci/*.sh, check for ci/values-ci.yaml)
+        id: prepare_ci
+        run: |
+          CHART_PATH="${{ matrix.chart }}"
+          CI_DIR="$CHART_PATH/ci"
+          VALUES_CI_FILE="$CI_DIR/values-ci.yaml"
+          HELM_EXTRA_ARGS_VALUE=""
+
+          echo "Checking for CI setup in: $CI_DIR for chart $CHART_PATH"
+          if [[ -d "$CI_DIR" ]]; then
+            echo "CI directory found."
+
+            # Execute scripts in alphabetical order if any *.sh exist
+            if compgen -G "$CI_DIR/*.sh" > /dev/null; then
+              echo "Executing scripts found in $CI_DIR (alphabetical order)..."
+              find "$CI_DIR" -maxdepth 1 -name '*.sh' -print0 | sort -z | xargs -0 -I {} bash "{}"
+              SCRIPT_EXIT_CODE=$?
+              if [[ $SCRIPT_EXIT_CODE -ne 0 ]]; then
+                echo "Error executing scripts in $CI_DIR. Exit code: $SCRIPT_EXIT_CODE"
+                exit $SCRIPT_EXIT_CODE
+              fi
+              echo "Finished executing scripts."
+            else
+              echo "No executable scripts (*.sh) found in $CI_DIR."
+            fi
+
+            if [[ -f "$VALUES_CI_FILE" ]]; then
+              echo "CI values file '$VALUES_CI_FILE' found. Preparing helm extra args."
+              HELM_EXTRA_ARGS_VALUE="-f $VALUES_CI_FILE"
+            else
+              echo "CI values file '$VALUES_CI_FILE' not found in $CI_DIR."
+            fi
+
+          else
+            echo "CI directory '$CI_DIR' not found. Skipping CI preparation steps."
+          fi
+
+          echo "helm_extra_args_value=${HELM_EXTRA_ARGS_VALUE}" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Run chart-testing (install)
-        run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"
+        run: |
+          CHART_PATH="${{ matrix.chart }}"
+          EXTRA_INSTALL_ARGS="" # Initialize empty
+
+          # Check if the output from the previous step (helm_extra_args_value) is non-empty
+          if [[ -n "${{ steps.prepare_ci.outputs.helm_extra_args_value }}" ]]; then
+            EXTRA_INSTALL_ARGS="--helm-extra-args \"${{ steps.prepare_ci.outputs.helm_extra_args_value }}\""
+          fi
+
+          echo "Running ct install for $CHART_PATH with derived extra args: $EXTRA_INSTALL_ARGS"
+          bash -c "ct install --charts '$CHART_PATH' --config .github/config/chart-testing.yaml $EXTRA_INSTALL_ARGS"
+        shell: bash
