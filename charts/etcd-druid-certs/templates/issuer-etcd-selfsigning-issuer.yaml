@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ .Values.etcdName }}-etcd-selfsigning-issuer
+  labels:
+    {{- include "etcd-druid-certs.labels" . | nindent 4 }}
+spec:
+  selfSigned: {}

@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.etcdName }}-etcd-client
+  labels:
+    {{- include "etcd-druid-certs.labels" . | nindent 4 }}
+spec:
+  commonName: root
+  secretName: {{ .Values.etcdName }}-etcd-client-tls
+  usages:
+  - "signing"
+  - "key encipherment"
+  - "client auth"
+  privateKey:
+    rotationPolicy: Always
+    algorithm: {{ .Values.privateKey.algorithm }}
+    size: {{ .Values.privateKey.size }}
+  issuerRef:
+    name: {{ .Values.etcdName }}-etcd-issuer
+    kind: Issuer

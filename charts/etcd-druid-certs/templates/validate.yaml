@@ -1,0 +1,3 @@
+{{- if not .Values.etcdName }}
+{{- fail "The name of the Etcd is required. Define the name in .Values.etcdName." }}
+{{- end }}
