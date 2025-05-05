@@ -71,5 +71,5 @@ jobs:
       - name: helm dependency update on changed chart
         run : helm dependency update ${{ matrix.chart }}
 
-      - name: helm unittest on changed charts
+      - name: helm kubeconform on changed charts
         run : helm kubeconform --config .github/config/chart-kubeconform.yaml ${{ matrix.chart }}
