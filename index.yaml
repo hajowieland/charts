@@ -26,6 +26,40 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/etcd-druid-certs-1.0.0/etcd-druid-certs-1.0.0.tgz
     version: 1.0.0
+  miniflux:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: 2.2.8
+    created: "2025-05-23T14:03:25.459857518Z"
+    description: A Helm chart for the miniflux feed reader
+    digest: cb28f43564df24c82336ea88fb3929dad5188e51149484f305b9d9ad79b50454
+    home: https://github.com/hajowieland/charts
+    icon: https://raw.githubusercontent.com/miniflux/logo/refs/heads/master/icon.svg
+    keywords:
+    - miniflux
+    - rss
+    - atom
+    - feeds
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: miniflux
+    sources:
+    - https://miniflux.app
+    - https://github.com/miniflux/v2
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
+    version: 1.0.0
   test:
   - annotations:
       artifacthub.io/changes: '[]'
@@ -67,4 +101,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/test-0.1.0/test-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-05T14:28:41.499192052Z"
+generated: "2025-05-23T14:03:25.459867727Z"
