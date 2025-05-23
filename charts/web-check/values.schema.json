@@ -1,0 +1,487 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "config": {
+      "properties": {
+        "env": {
+          "properties": {
+            "API_CORS_ORIGIN": {
+              "default": "*",
+              "description": "Full list of possible values\nhttps://github.com/Lissy93/web-check/blob/master/.env",
+              "required": [],
+              "title": "API_CORS_ORIGIN",
+              "type": "string"
+            },
+            "API_ENABLE_RATE_LIMIT": {
+              "default": "false",
+              "required": [],
+              "title": "API_ENABLE_RATE_LIMIT",
+              "type": "string"
+            },
+            "API_TIMEOUT_LIMIT": {
+              "default": "10000",
+              "required": [],
+              "title": "API_TIMEOUT_LIMIT",
+              "type": "string"
+            },
+            "DISABLE_GUI": {
+              "default": "false",
+              "required": [],
+              "title": "DISABLE_GUI",
+              "type": "string"
+            },
+            "ENABLE_ANALYTICS": {
+              "default": "false",
+              "required": [],
+              "title": "ENABLE_ANALYTICS",
+              "type": "string"
+            },
+            "PUPPETEER_EXECUTABLE_PATH": {
+              "default": "/usr/bin/chromium",
+              "description": "see: https://github.com/Lissy93/web-check/issues/108#issuecomment-2307696851",
+              "required": [],
+              "title": "PUPPETEER_EXECUTABLE_PATH",
+              "type": "string"
+            }
+          },
+          "required": [
+            "API_CORS_ORIGIN",
+            "API_ENABLE_RATE_LIMIT",
+            "API_TIMEOUT_LIMIT",
+            "DISABLE_GUI",
+            "ENABLE_ANALYTICS",
+            "PUPPETEER_EXECUTABLE_PATH"
+          ],
+          "title": "env",
+          "type": "object"
+        },
+        "envSecrets": {
+          "properties": {
+            "secretKeyRef": {
+              "description": "Use this when using one k8s secret for each env secret",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "secretKeyRef",
+              "type": "array"
+            }
+          },
+          "required": [
+            "secretKeyRef"
+          ],
+          "title": "envSecrets",
+          "type": "object"
+        }
+      },
+      "required": [
+        "envSecrets",
+        "env"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "ghcr.io/lissy93/web-check",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "latest",
+          "description": "Overrides the image tag whose default is the chart appVersion.",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "web-check.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "livenessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "securityContext": {
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 3000,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "automount": {
+          "default": false,
+          "description": "Automatically mount a ServiceAccount's API credentials?",
+          "required": [],
+          "title": "automount",
+          "type": "boolean"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "automount",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    },
+    "volumeMounts": {
+      "description": "Additional volumeMounts on the output Deployment definition.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumeMounts",
+      "type": "array"
+    },
+    "volumes": {
+      "description": "Additional volumes on the output Deployment definition.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "replicaCount",
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "autoscaling",
+    "volumes",
+    "volumeMounts",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "config"
+  ],
+  "type": "object"
+}
