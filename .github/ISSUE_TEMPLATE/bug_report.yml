@@ -17,7 +17,9 @@ body:
       description: Enter the name of the Chart where you encountered this bug.
       options:
         - etcd-druid-certs
+        - librechat-rag-api
         - miniflux
+        - web-check
     validations:
       required: true
 

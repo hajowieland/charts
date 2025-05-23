@@ -1,0 +1,29 @@
+apiVersion: v2
+name: rag-api
+description: A Helm chart for rag-api (LibreChat)
+type: application
+version: 1.0.0
+appVersion: "v0.5.0"
+home: https://github.com/hajowieland/charts
+keywords:
+  - librechat
+  - rag-api
+  - rag_api
+  - rag
+  - embeddings
+maintainers:
+  - name: hajowieland
+    email: mail@wieland.tech
+sources:
+  - https://github.com/danny-avila/rag_api
+  - https://librechat.ai
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial commit of Chart
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/hajowieland/charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+    url: https://charts.wieland.tech/public.key
