@@ -1,0 +1,17 @@
+postgresSecret:
+  enabled: true
+  secretName: "test-db-cluster-app"
+  uriKey: "uri"
+
+config:
+  envSecrets:
+    secretRef: test
+    secretKeyRef:
+      - name: POSTGRES_USER
+        secretName: test-db-cluster-superuser
+        secretKey: username
+      - name: POSTGRES_PASSWORD
+        secretName: test-db-cluster-superuser
+        secretKey: password
+  env:
+    CONSOLE_JSON: "False"

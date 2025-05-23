@@ -1,0 +1,62 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/librechat-rag-api
+```
+
+## Introduction
+
+This chart deploys the [RAG API](https://github.com/danny-avila/rag_api) for [LibreChat](https://librechat.ai).
+
+## Prerequisites
+
+- Postgres database (e.g. [CloudNativePG](https://cloudnative-pg.io))
+
+You can reference the [CNPG Cluster's app Secret](https://cloudnative-pg.io/documentation/1.20/applications/) in `.postgresSecret.secretName`.
+
+> To create the pgvector extension, superuser credentials are required. See [ci-values.yaml](./ci/ci-values.yaml) for an example on how to get superuser username and password from another Secret.
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/miniflux
+```
+
+The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Configuration
+
+All RAG API configuration settings can be found here: https://github.com/danny-avila/rag_api/tree/{{ template "chart.appVersion" . }}?tab=readme-ov-file
+
+Just add the Environment Variable in the `.env` section.
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml hajowieland/miniflux
+```

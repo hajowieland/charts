@@ -1,0 +1,618 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "config": {
+      "properties": {
+        "env": {
+          "description": "     - name: CREDS_IV\n       secretName: librechat\n       secretKey: CREDS_IV",
+          "properties": {
+            "CHUNK_OVERLAP": {
+              "default": "100",
+              "required": [],
+              "title": "CHUNK_OVERLAP",
+              "type": "string"
+            },
+            "CHUNK_SIZE": {
+              "default": "1500",
+              "required": [],
+              "title": "CHUNK_SIZE",
+              "type": "string"
+            },
+            "COLLECTION_NAME": {
+              "default": "testcollection",
+              "required": [],
+              "title": "COLLECTION_NAME",
+              "type": "string"
+            },
+            "CONSOLE_JSON": {
+              "default": "True",
+              "required": [],
+              "title": "CONSOLE_JSON",
+              "type": "string"
+            },
+            "DEBUG_RAG_API": {
+              "default": "False",
+              "required": [],
+              "title": "DEBUG_RAG_API",
+              "type": "string"
+            },
+            "EMBEDDINGS_MODEL": {
+              "default": "text-embedding-3-small",
+              "required": [],
+              "title": "EMBEDDINGS_MODEL",
+              "type": "string"
+            },
+            "EMBEDDINGS_PROVIDER": {
+              "default": "openai",
+              "required": [],
+              "title": "EMBEDDINGS_PROVIDER",
+              "type": "string"
+            },
+            "PDF_EXTRACT_IMAGES": {
+              "default": "False",
+              "required": [],
+              "title": "PDF_EXTRACT_IMAGES",
+              "type": "string"
+            },
+            "RAG_USE_FULL_CONTEXT": {
+              "default": "False",
+              "required": [],
+              "title": "RAG_USE_FULL_CONTEXT",
+              "type": "string"
+            },
+            "VECTOR_DB_TYPE": {
+              "default": "pgvector",
+              "required": [],
+              "title": "VECTOR_DB_TYPE",
+              "type": "string"
+            }
+          },
+          "required": [
+            "CHUNK_SIZE",
+            "CHUNK_OVERLAP",
+            "COLLECTION_NAME",
+            "CONSOLE_JSON",
+            "DEBUG_RAG_API",
+            "EMBEDDINGS_PROVIDER",
+            "EMBEDDINGS_MODEL",
+            "PDF_EXTRACT_IMAGES",
+            "RAG_USE_FULL_CONTEXT",
+            "VECTOR_DB_TYPE"
+          ],
+          "title": "env",
+          "type": "object"
+        },
+        "envSecrets": {
+          "properties": {
+            "secretKeyRef": {
+              "description": "Use this when using one k8s secret for each env secret",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "secretKeyRef",
+              "type": "array"
+            }
+          },
+          "required": [
+            "secretKeyRef"
+          ],
+          "title": "envSecrets",
+          "type": "object"
+        }
+      },
+      "required": [
+        "envSecrets",
+        "env"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "ghcr.io/danny-avila/librechat-rag-api-dev-lite",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "latest",
+          "description": "Overrides the image tag whose default is the chart appVersion.",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "livenessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/health",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "persistence": {
+      "properties": {
+        "accessMode": {
+          "default": "ReadWriteOnce",
+          "required": [],
+          "title": "accessMode",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "existingClaim": {
+          "default": "",
+          "required": [],
+          "title": "existingClaim",
+          "type": "string"
+        },
+        "size": {
+          "default": "10Gi",
+          "required": [],
+          "title": "size",
+          "type": "string"
+        },
+        "storageClass": {
+          "default": "",
+          "required": [],
+          "title": "storageClass",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "existingClaim",
+        "storageClass",
+        "accessMode",
+        "size"
+      ],
+      "title": "persistence",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "postgresSecret": {
+      "properties": {
+        "dbnameKey": {
+          "default": "dbname",
+          "required": [],
+          "title": "dbnameKey",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hostKey": {
+          "default": "host",
+          "required": [],
+          "title": "hostKey",
+          "type": "string"
+        },
+        "passwordKey": {
+          "default": "",
+          "description": "if empty, set POSTGRES_PASSWORD in .config.env - or get superuser password from .config.secretKeyRef and set name: POSTGRES_PASSWORD",
+          "required": [],
+          "title": "passwordKey",
+          "type": "string"
+        },
+        "portKey": {
+          "default": "port",
+          "required": [],
+          "title": "portKey",
+          "type": "string"
+        },
+        "secretName": {
+          "default": "",
+          "required": [],
+          "title": "secretName",
+          "type": "string"
+        },
+        "userKey": {
+          "default": "",
+          "description": "# if empty, set POSTGRES_USER in .config.env",
+          "required": [],
+          "title": "userKey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "secretName",
+        "userKey",
+        "passwordKey",
+        "dbnameKey",
+        "hostKey",
+        "portKey"
+      ],
+      "title": "postgresSecret",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/health",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "securityContext": {
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 8000,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "automount": {
+          "default": true,
+          "description": "Automatically mount a ServiceAccount's API credentials?",
+          "required": [],
+          "title": "automount",
+          "type": "boolean"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "automount",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    },
+    "volumeMounts": {
+      "description": "Additional volumeMounts on the output Deployment definition.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumeMounts",
+      "type": "array"
+    },
+    "volumes": {
+      "description": "Additional volumes on the output Deployment definition.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "replicaCount",
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "autoscaling",
+    "volumes",
+    "volumeMounts",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "persistence",
+    "postgresSecret",
+    "config"
+  ],
+  "type": "object"
+}
