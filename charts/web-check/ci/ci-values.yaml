@@ -1,0 +1,3 @@
+config:
+  envSecrets:
+    secretRef: web-check-test
