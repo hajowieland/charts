@@ -60,6 +60,40 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
+  rag-api:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: v0.5.0
+    created: "2025-05-23T18:56:19.326080624Z"
+    description: A Helm chart for rag-api (LibreChat)
+    digest: bd6df97e1b58fd165426e09756d6f2031f6db6052e021231282d1d041a22234b
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - librechat
+    - rag-api
+    - rag_api
+    - rag
+    - embeddings
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: rag-api
+    sources:
+    - https://github.com/danny-avila/rag_api
+    - https://librechat.ai
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/rag-api-1.0.0/rag-api-1.0.0.tgz
+    version: 1.0.0
   test:
   - annotations:
       artifacthub.io/changes: '[]'
@@ -137,4 +171,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-23T17:53:15.339881478Z"
+generated: "2025-05-23T18:56:19.326109668Z"
