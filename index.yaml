@@ -101,4 +101,40 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/test-0.1.0/test-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-23T14:03:25.459867727Z"
+  web-check:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-05-23T17:53:15.339867011Z"
+    description: A Helm chart for web-check all-in-one OSINT tool for analysing any
+      website
+    digest: 3c670a654af540a2577152a7e3e48f882191f562b5d0077d723d75bd6d860a79
+    home: https://github.com/hajowieland/charts
+    icon: https://camo.githubusercontent.com/def1f3032b6ec59d11b109c906eb7a512796acbf46da8a7e53a3f1fa19fdcade/68747470733a2f2f692e6962622e636f2f7131675a4e32702f7765622d636865636b2d6c6f676f2e706e67
+    keywords:
+    - security
+    - privacy
+    - osint
+    - sysadmin
+    - security-tools
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: web-check
+    sources:
+    - https://web-check.xyz
+    - https://github.com/Lissy93/web-check
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-05-23T17:53:15.339881478Z"
