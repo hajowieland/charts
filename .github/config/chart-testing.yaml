@@ -15,3 +15,4 @@ release-label: release
 chart-repos:
   - hajowieland=https://charts.wieland.tech
 helm-extra-args: "--timeout 600s"
+namespace: default
