@@ -1,0 +1,29 @@
+apiVersion: v2
+name: miniflux
+description: A Helm chart for the miniflux feed reader
+type: application
+version: 1.0.0
+appVersion: "2.2.8"
+home: https://github.com/hajowieland/charts
+icon: https://raw.githubusercontent.com/miniflux/logo/refs/heads/master/icon.svg
+keywords:
+  - miniflux
+  - rss
+  - atom
+  - feeds
+maintainers:
+  - name: hajowieland
+    email: mail@wieland.tech
+sources:
+  - https://miniflux.app
+  - https://github.com/miniflux/v2
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial commit of Chart
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/hajowieland/charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+    url: https://charts.wieland.tech/public.key

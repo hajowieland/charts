@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "miniflux.fullname" . }}-nginxconf
+  labels:
+    {{- include "miniflux.labels" . | nindent 4 }}
+data:
+  nginx.conf: |
+    server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /app;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        index index.php;
+
+        location ~ /(\.|vendor|tests) {
+            deny all;
+            return 403; # Forbidden
+        }
+
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_read_timeout 45s;
+            fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        }
+    }
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "miniflux.fullname" . }}-phpfpmconf
+  labels:
+    {{- include "miniflux.labels" . | nindent 4 }}
+data:
+  php-fpm.conf: |
+    [global]
+    error_log = /proc/self/fd/2
+
+    ; https://github.com/docker-library/php/pull/725#issuecomment-443540114
+    log_limit = 8192
+
+    [www]
+    ; php-fpm closes STDOUT on startup, so sending logs to /proc/self/fd/1 does not work.
+    ; https://bugs.php.net/bug.php?id=73886
+    access.log = /proc/self/fd/2
+
+    clear_env = no
+
+    ; Ensure worker stdout and stderr are sent to the main error log.
+    catch_workers_output = yes
+    decorate_workers_output = no
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "miniflux.fullname" . }}-phpini
+  labels:
+    {{- include "miniflux.labels" . | nindent 4 }}
+data:
+  php.ini: |
+    ; https://github.com/docker-library/php/issues/878#issuecomment-938595965
+    fastcgi.logging = Off
