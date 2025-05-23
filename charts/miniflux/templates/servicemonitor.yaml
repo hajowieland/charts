@@ -1,0 +1,18 @@
+{{- if .Values.metrics.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "miniflux.fullname" . }}
+  labels:
+    {{- include "miniflux.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - interval: {{ .Values.metrics.serviceMonitor.interval }}
+    path: /metrics
+    port: http
+    scheme: http
+    scrapeTimeout: {{ .Values.metrics.serviceMonitor.scrapeTimeout }}
+  selector:
+    matchLabels:
+      {{- include "miniflux.selectorLabels" . | nindent 6 }}
+{{- end }}

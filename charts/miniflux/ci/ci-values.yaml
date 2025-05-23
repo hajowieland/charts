@@ -1,0 +1,16 @@
+adminSecret:
+  enabled: true
+  secretName: "miniflux-admin"
+  secretKey: "password"
+
+postgresSecret:
+  enabled: true
+  secretName: "test-db-cluster-app"
+  uriKey: "uri"
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+  dashboard:
+    enabled: true

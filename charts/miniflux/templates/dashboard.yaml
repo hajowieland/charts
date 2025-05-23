@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "miniflux.fullname" . }}-dashboard
+  labels:
+    {{ .Values.metrics.dashboard.grafana_label}}: {{ .Values.metrics.dashboard.grafana_label_key | quote }}
+    {{- include "miniflux.labels" . | nindent 4 }}
+data:
+  miniflux-dashboard.json: |-
+    {{- $.Files.Get "dashboards/miniflux.json" | nindent 4 }}
