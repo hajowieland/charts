@@ -889,7 +889,7 @@
       "type": "array"
     },
     "wait": {
-      "description": "initContainer to wait until all components (exporter, meilisearch, sandpack, ragapi) are ready before running LibreChat.",
+      "description": "initContainer to wait until all components (meilisearch, sandpack, ragapi) are ready before running LibreChat.",
       "properties": {
         "enabled": {
           "default": false,

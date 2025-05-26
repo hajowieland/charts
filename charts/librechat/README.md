@@ -202,7 +202,7 @@ exporter:
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | tolerations | list | `[]` |  |
-| wait | object | `{"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"alpine/curl","tag":"8.12.1"}}` | initContainer to wait until all components (exporter, meilisearch, sandpack, ragapi) are ready before running LibreChat. |
+| wait | object | `{"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"alpine/curl","tag":"8.12.1"}}` | initContainer to wait until all components (meilisearch, sandpack, ragapi) are ready before running LibreChat. |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

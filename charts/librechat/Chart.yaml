@@ -2,7 +2,7 @@ apiVersion: v2
 name: librechat
 description: Helm Chart for LibreChat
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "v0.7.8"
 home: https://github.com/hajowieland/charts
 keywords:
@@ -36,8 +36,8 @@ dependencies:
     condition: meilisearch.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Initial commit of Chart
+    - kind: changed
+      description: Removed exporter in wait initContainer
   artifacthub.io/links: |
     - name: support
       url: https://github.com/hajowieland/charts/issues

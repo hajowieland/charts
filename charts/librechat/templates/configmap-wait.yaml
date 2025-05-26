@@ -13,23 +13,11 @@ data:
     urls_to_check=""
     is_first_url=true
 
-    exporter_enabled={{ .Values.exporter.enabled }}
     meilisearch_enabled={{ .Values.meilisearch.enabled }}
     ragapi_enabled={{ .Values.ragapi.enabled }}
     sandpack_enabled={{ .Values.sandpack.enabled }}
 
     echo "Evaluating enabled dependencies..."
-
-    if [ "$exporter_enabled" = "true" ]; then
-      exporter_url="http://{{ include "librechat.fullname" . }}-exporter:8000"
-      echo "Exporter dependency is enabled."
-      if [ "$is_first_url" = true ]; then
-        urls_to_check="$exporter_url"
-        is_first_url=false
-      else
-        urls_to_check="$urls_to_check $exporter_url"
-      fi
-    fi
 
     if [ "$meilisearch_enabled" = "true" ]; then
       meilisearch_url="http://{{ include "librechat.fullname" . }}-meilisearch:7700"

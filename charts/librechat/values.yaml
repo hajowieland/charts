@@ -99,7 +99,7 @@ tolerations: []
 
 affinity: {}
 
-# -- initContainer to wait until all components (exporter, meilisearch, sandpack, ragapi) are ready before running LibreChat.
+# -- initContainer to wait until all components (meilisearch, sandpack, ragapi) are ready before running LibreChat.
 wait:
   enabled: false
   image:
