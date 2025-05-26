@@ -1,0 +1,10 @@
+env:
+  MONGODB_DATABASE: admin
+config:
+  envSecrets:
+    secretKeyRef:
+      - name: MONGODB_URI
+        secretName: test-db-cluster-admin-librechat
+        secretKey: "connectionString.standard"
+serviceMonitor:
+  enabled: true

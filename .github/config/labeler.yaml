@@ -8,6 +8,9 @@ ci-cd:
 etcd-druid-certs:
 - changed-files:
   - any-glob-to-any-file: charts/etcd-druid-certs/*
+librechat-exporter:
+  - changed-files:
+      - any-glob-to-any-file: charts/librechat-exporter/*
 librechat-rag-api:
 - changed-files:
     - any-glob-to-any-file: charts/librechat-rag-api/*
