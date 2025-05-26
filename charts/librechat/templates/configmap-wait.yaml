@@ -1,0 +1,106 @@
+{{- if .Values.wait.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "librechat.fullname" . }}-wait
+  labels:
+    {{- include "librechat.labels" . | nindent 4 }}
+data:
+  check-dependencies.sh: |
+    #!/bin/sh
+    set -e
+
+    urls_to_check=""
+    is_first_url=true
+
+    exporter_enabled={{ .Values.exporter.enabled }}
+    meilisearch_enabled={{ .Values.meilisearch.enabled }}
+    ragapi_enabled={{ .Values.ragapi.enabled }}
+    sandpack_enabled={{ .Values.sandpack.enabled }}
+
+    echo "Evaluating enabled dependencies..."
+
+    if [ "$exporter_enabled" = "true" ]; then
+      exporter_url="http://{{ include "librechat.fullname" . }}-exporter:8000"
+      echo "Exporter dependency is enabled."
+      if [ "$is_first_url" = true ]; then
+        urls_to_check="$exporter_url"
+        is_first_url=false
+      else
+        urls_to_check="$urls_to_check $exporter_url"
+      fi
+    fi
+
+    if [ "$meilisearch_enabled" = "true" ]; then
+      meilisearch_url="http://{{ include "librechat.fullname" . }}-meilisearch:7700"
+      echo "Meilisearch dependency is enabled."
+      if [ "$is_first_url" = true ]; then
+        urls_to_check="$meilisearch_url"
+        is_first_url=false
+      else
+        urls_to_check="$urls_to_check $meilisearch_url"
+      fi
+    fi
+
+    if [ "$ragapi_enabled" = "true" ]; then
+      ragapi_url="http://{{ include "librechat.fullname" . }}-ragapi:8000/health"
+      echo "RAG-API dependency is enabled."
+      if [ "$is_first_url" = true ]; then
+        urls_to_check="$ragapi_url"
+        is_first_url=false
+      else
+        urls_to_check="$urls_to_check $ragapi_url"
+      fi
+    fi
+
+    if [ "$sandpack_enabled" = "true" ]; then
+      sandpack_url="http://{{ .Values.sandpack.applicationName }}"
+      echo "Sandpack dependency is enabled."
+      if [ "$is_first_url" = true ]; then
+        urls_to_check="$sandpack_url"
+        is_first_url=false
+      else
+        urls_to_check="$urls_to_check $sandpack_url"
+      fi
+    fi
+
+    if [ "$is_first_url" = true ]; then
+      echo "No dependencies are enabled for checking. InitContainer will exit successfully."
+      exit 0
+    fi
+
+    echo "Final list of URLs to check: $urls_to_check"
+
+    max_attempts=30
+    sleep_interval=3
+    curl_connect_timeout=3
+    curl_max_time=7
+
+    echo "Starting dependency checks..."
+    for attempt in $(seq 1 $max_attempts); do
+      all_ready=true
+      for url in $urls_to_check; do
+        echo "Attempt $attempt/$max_attempts: Checking $url..."
+        if ! curl -sSf --connect-timeout "$curl_connect_timeout" --max-time "$curl_max_time" -o /dev/null "$url"; then
+          echo "Attempt $attempt/$max_attempts: $url is not ready."
+          all_ready=false
+          break
+        else
+          echo "Attempt $attempt/$max_attempts: $url is ready."
+        fi
+      done
+
+      if [ "$all_ready" = true ]; then
+        echo "All dependencies are ready!"
+        exit 0
+      fi
+
+      if [ "$attempt" -lt "$max_attempts" ]; then
+        echo "Not all dependencies ready. Retrying in $sleep_interval seconds..."
+        sleep $sleep_interval
+      fi
+    done
+
+    echo "Error: One or more dependencies did not become ready after $max_attempts attempts: $urls_to_check"
+    exit 1
+{{- end }}

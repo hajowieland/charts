@@ -1,0 +1,8 @@
+config:
+  externalDomain: "http://example.com"
+  envSecrets:
+    secretRef: librechat
+    secretKeyRef:
+      - name: MONGO_URI
+        secretName: test-mongo-cluster-admin-librechat
+        secretKey: "connectionString.standard"

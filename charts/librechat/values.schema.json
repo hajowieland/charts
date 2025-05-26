@@ -1,0 +1,967 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "config": {
+      "properties": {
+        "env": {
+          "properties": {
+            "ALLOW_EMAIL_LOGIN": {
+              "default": "true",
+              "description": "Full list of possible values\nhttps://github.com/danny-avila/LibreChat/blob/main/.env.example",
+              "required": [],
+              "title": "ALLOW_EMAIL_LOGIN",
+              "type": "string"
+            },
+            "ALLOW_REGISTRATION": {
+              "default": "false",
+              "required": [],
+              "title": "ALLOW_REGISTRATION",
+              "type": "string"
+            },
+            "ALLOW_SOCIAL_LOGIN": {
+              "default": "false",
+              "required": [],
+              "title": "ALLOW_SOCIAL_LOGIN",
+              "type": "string"
+            },
+            "ALLOW_SOCIAL_REGISTRATION": {
+              "default": "false",
+              "required": [],
+              "title": "ALLOW_SOCIAL_REGISTRATION",
+              "type": "string"
+            }
+          },
+          "required": [
+            "ALLOW_EMAIL_LOGIN",
+            "ALLOW_REGISTRATION",
+            "ALLOW_SOCIAL_LOGIN",
+            "ALLOW_SOCIAL_REGISTRATION"
+          ],
+          "title": "env",
+          "type": "object"
+        },
+        "envSecrets": {
+          "properties": {
+            "secretKeyRef": {
+              "description": "Use this when using one k8s secret for each env secret",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "secretKeyRef",
+              "type": "array"
+            }
+          },
+          "required": [
+            "secretKeyRef"
+          ],
+          "title": "envSecrets",
+          "type": "object"
+        },
+        "externalDomain": {
+          "default": "",
+          "description": "sets DOMAIN_CLIENT and DOMAIN_SERVER, should be the external URL like https://chat.example.com",
+          "required": [],
+          "title": "externalDomain",
+          "type": "string"
+        },
+        "librechatYaml": {
+          "description": "Examples: https://github.com/LibreChat-AI/librechat-config-yaml",
+          "properties": {
+            "version": {
+              "default": "1.2.5",
+              "required": [],
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version"
+          ],
+          "title": "librechatYaml",
+          "type": "object"
+        }
+      },
+      "required": [
+        "envSecrets",
+        "env",
+        "externalDomain",
+        "librechatYaml"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "exporter": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "exporter",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "ghcr.io/danny-avila/librechat",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "description": "Overrides the image tag whose default is the chart appVersion.",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chat.example.com",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "livenessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "required": [],
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 3,
+          "required": [],
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "httpGet",
+        "initialDelaySeconds",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "meilisearch": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "environment": {
+          "properties": {
+            "MEILI_ENV": {
+              "default": "production",
+              "required": [],
+              "title": "MEILI_ENV",
+              "type": "string"
+            },
+            "MEILI_NO_ANALYTICS": {
+              "default": false,
+              "required": [],
+              "title": "MEILI_NO_ANALYTICS",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "MEILI_NO_ANALYTICS",
+            "MEILI_ENV"
+          ],
+          "title": "environment",
+          "type": "object"
+        },
+        "persistence": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "persistence",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "environment",
+        "persistence"
+      ],
+      "title": "meilisearch",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "networkPolicies": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "networkPolicies",
+      "type": "object"
+    },
+    "nodeSelector": {
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "ragapi": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "ragapi",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "required": [],
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 3,
+          "required": [],
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "httpGet",
+        "initialDelaySeconds",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "sandpack": {
+      "properties": {
+        "applicationName": {
+          "default": "librechat-sandpack",
+          "required": [],
+          "title": "applicationName",
+          "type": "string"
+        },
+        "deployment": {
+          "properties": {
+            "containerSecurityContext": {
+              "properties": {
+                "readOnlyRootFilesystem": {
+                  "default": false,
+                  "required": [],
+                  "title": "readOnlyRootFilesystem",
+                  "type": "boolean"
+                },
+                "runAsNonRoot": {
+                  "default": false,
+                  "required": [],
+                  "title": "runAsNonRoot",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "readOnlyRootFilesystem",
+                "runAsNonRoot"
+              ],
+              "title": "containerSecurityContext",
+              "type": "object"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "ghcr.io/librechat-ai/codesandbox-client/bundler",
+                  "required": [],
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "latest",
+                  "required": [],
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "repository",
+                "tag",
+                "pullPolicy"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "livenessProbe": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "httpGet": {
+                  "properties": {
+                    "path": {
+                      "default": "/",
+                      "required": [],
+                      "title": "path",
+                      "type": "string"
+                    },
+                    "port": {
+                      "default": "http",
+                      "required": [],
+                      "title": "port",
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "default": "HTTP",
+                      "required": [],
+                      "title": "scheme",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "port",
+                    "scheme"
+                  ],
+                  "title": "httpGet",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "enabled",
+                "httpGet"
+              ],
+              "title": "livenessProbe",
+              "type": "object"
+            },
+            "ports": {
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "containerPort": {
+                        "default": 80,
+                        "required": [],
+                        "title": "containerPort",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "default": "http",
+                        "required": [],
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "protocol": {
+                        "default": "TCP",
+                        "required": [],
+                        "title": "protocol",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "protocol",
+                      "containerPort"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "ports",
+              "type": "array"
+            },
+            "readinessProbe": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "httpGet": {
+                  "properties": {
+                    "path": {
+                      "default": "/",
+                      "required": [],
+                      "title": "path",
+                      "type": "string"
+                    },
+                    "port": {
+                      "default": "http",
+                      "required": [],
+                      "title": "port",
+                      "type": "string"
+                    },
+                    "scheme": {
+                      "default": "HTTP",
+                      "required": [],
+                      "title": "scheme",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "port",
+                    "scheme"
+                  ],
+                  "title": "httpGet",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "enabled",
+                "httpGet"
+              ],
+              "title": "readinessProbe",
+              "type": "object"
+            }
+          },
+          "required": [
+            "image",
+            "containerSecurityContext",
+            "livenessProbe",
+            "readinessProbe",
+            "ports"
+          ],
+          "title": "deployment",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "service": {
+          "properties": {
+            "ports": {
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "name": {
+                        "default": "http",
+                        "required": [],
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "port": {
+                        "default": 80,
+                        "required": [],
+                        "title": "port",
+                        "type": "integer"
+                      },
+                      "protocol": {
+                        "default": "TCP",
+                        "required": [],
+                        "title": "protocol",
+                        "type": "string"
+                      },
+                      "targetPort": {
+                        "default": 80,
+                        "required": [],
+                        "title": "targetPort",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "port",
+                      "name",
+                      "protocol",
+                      "targetPort"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "ports",
+              "type": "array"
+            }
+          },
+          "required": [
+            "ports"
+          ],
+          "title": "service",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "applicationName",
+        "deployment",
+        "service"
+      ],
+      "title": "sandpack",
+      "type": "object"
+    },
+    "securityContext": {
+      "properties": {
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "readOnlyRootFilesystem": {
+          "default": false,
+          "description": "filesystems needs to be writable - or LibreChat fails at startup",
+          "required": [],
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 3080,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    },
+    "wait": {
+      "description": "initContainer to wait until all components (exporter, meilisearch, sandpack, ragapi) are ready before running LibreChat.",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "repository": {
+              "default": "alpine/curl",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "8.12.1",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag",
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "image"
+      ],
+      "title": "wait",
+      "type": "object"
+    }
+  },
+  "required": [
+    "replicaCount",
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "securityContext",
+    "networkPolicies",
+    "service",
+    "ingress",
+    "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "wait",
+    "exporter",
+    "meilisearch",
+    "ragapi",
+    "sandpack",
+    "config"
+  ],
+  "type": "object"
+}
