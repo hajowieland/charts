@@ -26,6 +26,57 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/etcd-druid-certs-1.0.0/etcd-druid-certs-1.0.0.tgz
     version: 1.0.0
+  librechat:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: v0.7.8
+    created: "2025-05-26T14:15:18.318264071Z"
+    dependencies:
+    - alias: exporter
+      condition: exporter.enabled
+      name: librechat-exporter
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: ragapi
+      condition: ragapi.enabled
+      name: rag-api
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: sandpack
+      condition: sandpack.enabled
+      name: application
+      repository: https://stakater.github.io/stakater-charts
+      version: 6.2.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.13.0
+    description: Helm Chart for LibreChat
+    digest: d69ae9e145e04a9f9b385dec87ffb9232713269a9055a2f3dbf1f3e92821e211
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - librechat
+    - ai
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: librechat
+    sources:
+    - https://librechat.ai
+    - https://github.com/danny-avila/LibreChat
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/librechat-1.0.0/librechat-1.0.0.tgz
+    version: 1.0.0
   librechat-exporter:
   - annotations:
       artifacthub.io/changes: |
@@ -205,4 +256,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-26T09:49:42.53985121Z"
+generated: "2025-05-26T14:15:18.318280041Z"
