@@ -1,0 +1,65 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/librechat-exporter
+```
+
+## Introduction
+
+This chart deploys [virtUOS/librechat_exporter](https://github.com/virtUOS/librechat_exporter): a Prometheus exporter for LibreChat.
+
+## Prerequisites
+
+- [LibreChat](https://github.com/hajowieland/charts/tree/main/charts/librechat)
+
+You need to reference the LibreChat MongoDB Secret containing the connection string via:
+
+```yaml
+env:
+  MONGODB_DATABASE: admin # Set your Mongo database name here
+config:
+  envSecrets:
+    secretKeyRef:
+      - name: MONGODB_URI
+        secretName: librechat-mongo-admin-librechat # Set the MongoDB Secret name here
+        secretKey: "connectionString.standard"
+```
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/librechat-exporter
+```
+
+The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml hajowieland/miniflux
+```

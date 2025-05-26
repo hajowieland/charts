@@ -1,0 +1,18 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "librechat-exporter.fullname" . }}
+  labels:
+    {{- include "librechat-exporter.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - interval: {{ .Values.serviceMonitor.interval }}
+    path: /metrics
+    port: http
+    scheme: http
+    scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+  selector:
+    matchLabels:
+      {{- include "librechat-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}
