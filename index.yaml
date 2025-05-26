@@ -26,6 +26,40 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/etcd-druid-certs-1.0.0/etcd-druid-certs-1.0.0.tgz
     version: 1.0.0
+  librechat-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit of Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: 2.0.0
+    created: "2025-05-26T09:49:42.539838436Z"
+    description: A Prometheus metrics exporter for LibreChat
+    digest: ef160064d7d6c842f5031a9a1aef52799a172c661a0142cadec1fddd191679be
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - librechat
+    - librechat-exporter
+    - prometheus
+    - exporter
+    - metrics
+    - ai
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: librechat-exporter
+    sources:
+    - https://github.com/virtUOS/librechat_exporter
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/librechat-exporter-1.0.0/librechat-exporter-1.0.0.tgz
+    version: 1.0.0
   miniflux:
   - annotations:
       artifacthub.io/changes: |
@@ -171,4 +205,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-23T18:56:19.326109668Z"
+generated: "2025-05-26T09:49:42.53985121Z"
