@@ -29,6 +29,56 @@ entries:
   librechat:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: Removed exporter in wait initContainer
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: v0.7.8
+    created: "2025-05-26T14:52:04.550081503Z"
+    dependencies:
+    - alias: exporter
+      condition: exporter.enabled
+      name: librechat-exporter
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: ragapi
+      condition: ragapi.enabled
+      name: rag-api
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: sandpack
+      condition: sandpack.enabled
+      name: application
+      repository: https://stakater.github.io/stakater-charts
+      version: 6.2.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.13.0
+    description: Helm Chart for LibreChat
+    digest: 570d29c1d01181baafa3556714b23b8de85392336eb1992871bddba70b21727b
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - librechat
+    - ai
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: librechat
+    sources:
+    - https://librechat.ai
+    - https://github.com/danny-avila/LibreChat
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/librechat-1.0.1/librechat-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Initial commit of Chart
       artifacthub.io/links: |
@@ -256,4 +306,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-26T14:15:18.318280041Z"
+generated: "2025-05-26T14:52:04.550112481Z"
