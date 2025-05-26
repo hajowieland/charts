@@ -1,0 +1,131 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/librechat
+```
+
+## Introduction
+
+This chart deploys the [RAG API](https://github.com/danny-avila/rag_api) for [LibreChat](https://librechat.ai).
+
+## Prerequisites
+
+- Mongo database (e.g. [mongodb-kubernetes-operator](https://github.com/mongodb/mongodb-kubernetes-operator))
+
+Then you can reference the MongoDB connection string Secret:
+
+```yaml
+config:
+  envSecrets:
+    secretRef: librechat
+    secretKeyRef:
+      - name: MONGO_URI
+        secretName: librechat-mongo-admin-librechat
+        secretKey: "connectionString.standard"
+```
+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add hajowieland https://charts.wieland.tech
+helm repo update
+helm install my-release hajowieland/miniflux
+```
+
+The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Tips
+
+The minimum required credentials are:
+
+- https://www.librechat.ai/toolkit/creds_generator
+- OPENAI_API_KEY _(can be a dummy)_
+
+## User registration
+
+By default, registration for new users is disabled for security purposes. The first to register will be assigned admin privileges.
+
+Enable registration via:
+
+```yaml
+config:
+  env:
+    ALLOW_REGISTRATION: "true"
+    # ALLOW_SOCIAL_REGISTRATION: "true" # if you plan to use OIDC (you need additional configuration)
+```
+
+## Deploy all components
+
+You can optionally deploy other LibreChat components.
+
+> Please set `.wait.enabled` to true to make sure all components below are up and running before starting LibreChat itself.
+
+### Meilisearch
+
+https://www.meilisearch.com
+
+```yaml
+meilisearch:
+  enabled: true
+```
+
+### rag_api
+
+https://github.com/danny-avila/rag_api
+
+Check the requirements (Postgres database) here: https://github.com/hajowieland/charts/tree/main/charts/librechat-rag-api#prerequisites
+
+```yaml
+ragapi:
+  enabled: true
+```
+
+### sandpack
+
+To use the [Artifacts](https://www.librechat.ai/docs/features/artifacts) feature and host the sandpack library yourself:
+
+```yaml
+sandpack:
+  enabled: true
+```
+
+### Prometheus Exporter
+
+For more observability of your LibreChat deployment, you can enable the [librechat_exporter](https://github.com/virtUOS/librechat_exporter/tree/main).
+
+See more info about configuration options here: https://github.com/hajowieland/charts/tree/main/charts/librechat-exporter
+
+```yaml
+exporter:
+  enabled: true
+```
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml hajowieland/miniflux
+```

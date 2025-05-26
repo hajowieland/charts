@@ -14,5 +14,7 @@ skip-missing-values: true
 release-label: release
 chart-repos:
   - hajowieland=https://charts.wieland.tech
+  - meilisearch=https://meilisearch.github.io/meilisearch-kubernetes
+  - stakater=https://stakater.github.io/stakater-charts
 helm-extra-args: "--timeout 600s"
 namespace: default

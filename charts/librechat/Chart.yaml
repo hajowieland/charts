@@ -1,0 +1,46 @@
+apiVersion: v2
+name: librechat
+description: Helm Chart for LibreChat
+type: application
+version: 1.0.0
+appVersion: "v0.7.8"
+home: https://github.com/hajowieland/charts
+keywords:
+  - librechat
+  - ai
+maintainers:
+  - name: hajowieland
+    email: mail@wieland.tech
+sources:
+  - https://librechat.ai
+  - https://github.com/danny-avila/LibreChat
+dependencies:
+  - name: librechat-exporter
+    alias: exporter
+    repository: https://charts.wieland.tech
+    version: 1.0.0
+    condition: exporter.enabled
+  - name: rag-api
+    alias: ragapi
+    repository: https://charts.wieland.tech
+    version: 1.0.0
+    condition: ragapi.enabled
+  - name: application
+    alias: sandpack
+    repository: https://stakater.github.io/stakater-charts
+    version: 6.2.0
+    condition: sandpack.enabled
+  - name: meilisearch
+    repository: https://meilisearch.github.io/meilisearch-kubernetes
+    version: 0.13.0
+    condition: meilisearch.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial commit of Chart
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/hajowieland/charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+    url: https://charts.wieland.tech/public.key

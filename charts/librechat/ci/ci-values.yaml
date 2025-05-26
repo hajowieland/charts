@@ -1,0 +1,48 @@
+exporter:
+  enabled: true
+  env:
+    MONGODB_DATABASE: admin
+  config:
+    envSecrets:
+      secretKeyRef:
+        - name: MONGODB_URI
+          secretName: test-mongo-cluster-admin-librechat
+          secretKey: "connectionString.standard"
+meilisearch:
+  enabled: true
+  environment:
+    MEILI_NO_ANALYTICS: false
+    MEILI_ENV: production
+  persistence:
+    enabled: false
+ragapi:
+  enabled: true
+  postgresSecret:
+    enabled: true
+    secretName: "test-db-cluster-app"
+    uriKey: "uri"
+  config:
+    envSecrets:
+      secretRef: librechat
+      secretKeyRef:
+        - name: POSTGRES_USER
+          secretName: test-db-cluster-superuser
+          secretKey: username
+        - name: POSTGRES_PASSWORD
+          secretName: test-db-cluster-superuser
+          secretKey: password
+sandpack:
+  enabled: true
+wait:
+  enabled: true
+config:
+  externalDomain: "http://example.com"
+  env:
+    SANDPACK_BUNDLER_URL: "http://librechat-sandpack"
+    SEARCH: "true"
+  envSecrets:
+    secretRef: librechat
+    secretKeyRef:
+      - name: MONGO_URI
+        secretName: test-mongo-cluster-admin-librechat
+        secretKey: "connectionString.standard"

@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "librechat.fullname" . }}
+  labels:
+    {{- include "librechat.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "librechat.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "librechat.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "librechat.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.wait.enabled  }}
+      initContainers:
+        - name: wait
+          image: "{{ .Values.wait.image.repository }}:{{ .Values.wait.image.tag }}"
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command: ["/bin/sh", "/scripts/check-dependencies.sh"]
+          volumeMounts:
+            - name: wait
+              mountPath: /scripts
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            {{- if .Values.config.envSecrets.secretRef }}
+            - secretRef:
+                name: {{ .Values.config.envSecrets.secretRef }}
+            {{- end }}
+            - configMapRef:
+                name: {{ include "librechat.fullname" . }}-env
+          env:
+            - name: CONFIG_PATH
+              value: "/config/librechat.yaml"
+            - name: DOMAIN_CLIENT
+              value: {{ .Values.config.externalDomain | quote}}
+            - name: DOMAIN_SERVER
+              value: {{ .Values.config.externalDomain | quote}}
+            - name: PORT
+              value: {{ .Values.service.port | quote}}
+            {{- if .Values.meilisearch.enabled }}
+            - name: SEARCH
+              value: "true"
+            - name: MEILI_HOST
+              value: "http://{{ include "librechat.fullname" . }}-meilisearch:7700"
+            - name: MEILI_NO_ANALYTICS
+              value: "true"
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "librechat.fullname" . }}-meilisearch-master-key"
+                  key: "MEILI_MASTER_KEY"
+            {{- end }}
+            {{- if .Values.ragapi.enabled}}
+            - name: RAG_API_URL
+              value: "http://{{ include "librechat.fullname" . }}-ragapi:8000"
+            {{- end }}
+            {{- if .Values.sandpack.enabled }}
+            - name: SANDPACK_BUNDLER_URL
+              value: "http://{{ .Values.sandpack.applicationName }}"
+            {{- end }}
+            {{- range $secretKeyRef := .Values.config.envSecrets.secretKeyRef }}
+            - name: {{ $secretKeyRef.name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secretKeyRef.secretName }}
+                  key: {{ $secretKeyRef.secretKey }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 3080
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "librechat.fullname" . }}-config
+        {{- if .Values.wait.enabled }}
+        - name: wait
+          configMap:
+            name: {{ include "librechat.fullname" . }}-wait
+        {{- end }}
