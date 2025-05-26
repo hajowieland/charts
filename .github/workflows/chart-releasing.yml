@@ -37,7 +37,9 @@ jobs:
 
       - name: Add Helm repositories
         run: |
-          helm repo add hajowieland https://charts.wieland.tech
+          for dir in $(ls -d charts/*/); do
+            helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
+          done
 
       - name: Import GPG key
         run: |
@@ -74,13 +76,6 @@ jobs:
           CR_KEYRING: keyring.gpg
           CR_PASSPHRASE_FILE: passphrase-file.txt
           CR_SIGN: true
-
-      - name: Add repositories
-        run: |
-          for dir in $(ls -d charts/*/); do
-            helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
-          done
-
 
       - name: Push Charts to GHCR
         run: |
