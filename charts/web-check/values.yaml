@@ -109,20 +109,20 @@ affinity: {}
 config:
   envSecrets:
     # Use this when using one k8s secret for multiply env secrets
-    # secretRef: librechat
+    # secretRef: web-check
 
     # Use this when using one k8s secret for each env secret
     secretKeyRef: []
-  #      - name: CREDS_IV
-  #        secretName: librechat
-  #        secretKey: CREDS_IV
+  #      - name: GOOGLE_CLOUD_API_KEY
+  #        secretName: web-check-secret
+  #        secretKey: googleApiKey
 
   env:
     # Full list of possible values
     # https://github.com/Lissy93/web-check/blob/master/.env
     API_CORS_ORIGIN: "*"
     API_ENABLE_RATE_LIMIT: "false"
-    API_TIMEOUT_LIMIT: "10000" # 10s
+    API_TIMEOUT_LIMIT: "60000" # 60s
     DISABLE_GUI: "false"
     ENABLE_ANALYTICS: "false"
     # -- see: https://github.com/Lissy93/web-check/issues/108#issuecomment-2307696851
