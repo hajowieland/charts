@@ -2,7 +2,7 @@ apiVersion: v2
 name: web-check
 description: A Helm chart for web-check all-in-one OSINT tool for analysing any website
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "1.0.0"
 home: https://github.com/hajowieland/charts
 icon: https://camo.githubusercontent.com/def1f3032b6ec59d11b109c906eb7a512796acbf46da8a7e53a3f1fa19fdcade/68747470733a2f2f692e6962622e636f2f7131675a4e32702f7765622d636865636b2d6c6f676f2e706e67
