@@ -23,8 +23,8 @@ API keys are required for the following external services:
 - `GOOGLE_CLOUD_API_KEY`: Google API key ([get here](https://cloud.google.com/api-gateway/docs/authenticate-api-keys)). This can be used to return quality metrics for a site
 - `REACT_APP_SHODAN_API_KEY`: Shodan API key ([get here](https://account.shodan.io/)). This will show associated host names for a given domain
 - `REACT_APP_WHO_API_KEY`: WhoAPI key ([get here](https://whoapi.com/)). This will show more comprehensive WhoIs records than the default job
-- `SECURITY_TRAILS_API_KEY` - Security Trails API key ([get here](https://securitytrails.com/corp/api)). This will show org info associated with the IP
-_ `TORRENT_IP_API_KEY`: A torrent API key ([get here](https://iknowwhatyoudownload.com/en/api/)). This will show torrents downloaded by an IP
+- `SECURITY_TRAILS_API_KEY` Security Trails API key ([get here](https://securitytrails.com/corp/api)). This will show org info associated with the IP
+- `TORRENT_IP_API_KEY`: A torrent API key ([get here](https://iknowwhatyoudownload.com/en/api/)). This will show torrents downloaded by an IP
 - `TRANCO_USERNAME` - Tranco email ([get here](https://tranco-list.eu/)). This will show the rank of a site, based on traffic
 - `TRANCO_API_KEY` - Tranco API key ([get here](https://tranco-list.eu/)). This will show the rank of a site, based on traffic
 - `URL_SCAN_API_KEY` - URLScan API key ([get here](https://urlscan.io/)). This will fetch miscalanious info about a site
@@ -66,7 +66,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | config.env.API_CORS_ORIGIN | string | `"*"` |  |
 | config.env.API_ENABLE_RATE_LIMIT | string | `"false"` |  |
-| config.env.API_TIMEOUT_LIMIT | string | `"10000"` |  |
+| config.env.API_TIMEOUT_LIMIT | string | `"60000"` |  |
 | config.env.DISABLE_GUI | string | `"false"` |  |
 | config.env.ENABLE_ANALYTICS | string | `"false"` |  |
 | config.env.PUPPETEER_EXECUTABLE_PATH | string | `"/usr/bin/chromium"` | see: https://github.com/Lissy93/web-check/issues/108#issuecomment-2307696851 |

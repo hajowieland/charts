@@ -60,7 +60,7 @@
               "type": "string"
             },
             "API_TIMEOUT_LIMIT": {
-              "default": "10000",
+              "default": "60000",
               "required": [],
               "title": "API_TIMEOUT_LIMIT",
               "type": "string"
