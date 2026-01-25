@@ -4,7 +4,6 @@
     "etcdName": {
       "default": "",
       "description": "Set the name for the desired Etcd cluster - will be used in cert SANs",
-      "required": [],
       "title": "etcdName",
       "type": "string"
     },
@@ -19,13 +18,11 @@
       "properties": {
         "algorithm": {
           "default": "RSA",
-          "required": [],
           "title": "algorithm",
           "type": "string"
         },
         "size": {
           "default": 4096,
-          "required": [],
           "title": "size",
           "type": "integer"
         }
@@ -40,7 +37,6 @@
     "replicas": {
       "default": 3,
       "description": "Replicas of the Etcd cluster",
-      "required": [],
       "title": "replicas",
       "type": "integer"
     },
@@ -51,13 +47,11 @@
           "items": {
             "anyOf": [
               {
-                "required": [],
                 "type": "string"
               }
             ],
             "required": []
           },
-          "required": [],
           "title": "organizationalUnits",
           "type": "array"
         },
@@ -65,13 +59,11 @@
           "items": {
             "anyOf": [
               {
-                "required": [],
                 "type": "string"
               }
             ],
             "required": []
           },
-          "required": [],
           "title": "organizations",
           "type": "array"
         }

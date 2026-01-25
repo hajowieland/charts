@@ -6,19 +6,16 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "secretKey": {
           "default": "",
-          "required": [],
           "title": "secretKey",
           "type": "string"
         },
         "secretName": {
           "default": "",
-          "required": [],
           "title": "secretName",
           "type": "string"
         }
@@ -40,25 +37,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -76,31 +69,26 @@
       "properties": {
         "ADMIN_USERNAME": {
           "default": "admin",
-          "required": [],
           "title": "ADMIN_USERNAME",
           "type": "string"
         },
         "CREATE_ADMIN": {
           "default": "1",
-          "required": [],
           "title": "CREATE_ADMIN",
           "type": "string"
         },
         "POLLING_PARSING_ERROR_LIMIT": {
           "default": "0",
-          "required": [],
           "title": "POLLING_PARSING_ERROR_LIMIT",
           "type": "string"
         },
         "RUN_MIGRATIONS": {
           "default": "1",
-          "required": [],
           "title": "RUN_MIGRATIONS",
           "type": "string"
         },
         "WORKER_POOL_SIZE": {
           "default": "10",
-          "required": [],
           "title": "WORKER_POOL_SIZE",
           "type": "string"
         }
@@ -117,7 +105,6 @@
     },
     "fullnameOverride": {
       "default": "",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -131,20 +118,17 @@
       "properties": {
         "pullPolicy": {
           "default": "IfNotPresent",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "repository": {
           "default": "ghcr.io/miniflux/miniflux",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "2.2.8",
           "description": "Overrides the image tag whose default is the chart appVersion.",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -161,7 +145,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -174,13 +157,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -192,7 +173,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -203,13 +183,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -223,7 +201,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -237,7 +214,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -245,7 +221,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -266,13 +241,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -295,13 +268,11 @@
       "properties": {
         "format": {
           "default": "json",
-          "required": [],
           "title": "format",
           "type": "string"
         },
         "level": {
           "default": "info",
-          "required": [],
           "title": "level",
           "type": "string"
         }
@@ -320,19 +291,16 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "grafana_label": {
               "default": "grafana_dashboard",
-              "required": [],
               "title": "grafana_label",
               "type": "string"
             },
             "grafana_label_key": {
               "default": "1",
-              "required": [],
               "title": "grafana_label_key",
               "type": "string"
             }
@@ -348,7 +316,6 @@
         "enabled": {
           "default": false,
           "description": "sets envvars METRICS_ALLOWED_NETWORKS to 0.0.0.0/0 and METRICS_COLLECTOR to 1",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -356,19 +323,16 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "interval": {
               "default": "30s",
-              "required": [],
               "title": "interval",
               "type": "string"
             },
             "scrapeTimeout": {
               "default": "30s",
-              "required": [],
               "title": "scrapeTimeout",
               "type": "string"
             }
@@ -392,7 +356,6 @@
     },
     "nameOverride": {
       "default": "",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -421,20 +384,17 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "secretName": {
           "default": "",
-          "required": [],
           "title": "secretName",
           "type": "string"
         },
         "uriKey": {
           "default": "uri",
           "description": "Can be used for the \"-app\" Secret created by a CNPG cluster",
-          "required": [],
           "title": "uriKey",
           "type": "string"
         }
@@ -453,13 +413,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -480,7 +438,6 @@
     },
     "replicaCount": {
       "default": 1,
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -493,7 +450,6 @@
       "properties": {
         "allowPrivilegeEscalation": {
           "default": false,
-          "required": [],
           "title": "allowPrivilegeEscalation",
           "type": "boolean"
         },
@@ -503,13 +459,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -522,19 +476,16 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 65534,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -553,13 +504,11 @@
       "properties": {
         "port": {
           "default": 8080,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -582,21 +531,18 @@
         "automount": {
           "default": true,
           "description": "Automatically mount a ServiceAccount's API credentials?",
-          "required": [],
           "title": "automount",
           "type": "boolean"
         },
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -614,7 +560,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -623,7 +568,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumeMounts",
       "type": "array"
     },
@@ -632,7 +576,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumes",
       "type": "array"
     }
