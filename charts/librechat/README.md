@@ -138,6 +138,7 @@ exporter:
 | config.librechatYaml | object | `{"version":"1.2.5"}` | Examples: https://github.com/LibreChat-AI/librechat-config-yaml |
 | exporter.enabled | bool | `false` |  |
 | fullnameOverride | string | `""` |  |
+| image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/danny-avila/librechat"` |  |
 | image.tag | string | `""` |  |

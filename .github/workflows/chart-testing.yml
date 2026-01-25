@@ -20,6 +20,8 @@ jobs:
 
       - name: setup helm
         uses: azure/setup-helm@v4
+        with:
+          version: v3.20.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -57,6 +59,8 @@ jobs:
 
       - name: setup helm
         uses: azure/setup-helm@v4
+        with:
+          version: v3.20.0
 
       - uses: actions/setup-python@v5
         with:
