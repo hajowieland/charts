@@ -39,6 +39,56 @@ entries:
         url: https://charts.wieland.tech/public.key
     apiVersion: v2
     appVersion: v0.7.8
+    created: "2026-01-25T13:56:43.344903071Z"
+    dependencies:
+    - alias: exporter
+      condition: exporter.enabled
+      name: librechat-exporter
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: ragapi
+      condition: ragapi.enabled
+      name: rag-api
+      repository: https://charts.wieland.tech
+      version: 1.0.0
+    - alias: sandpack
+      condition: sandpack.enabled
+      name: application
+      repository: https://stakater.github.io/stakater-charts
+      version: 6.2.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.13.0
+    description: Helm Chart for LibreChat
+    digest: 53684ceb0e8a900293407dc8c0725221c7c255d04e49c6035b2cb83a17eb90b3
+    home: https://github.com/hajowieland/charts
+    keywords:
+    - librechat
+    - ai
+    maintainers:
+    - email: mail@wieland.tech
+      name: hajowieland
+    name: librechat
+    sources:
+    - https://librechat.ai
+    - https://github.com/danny-avila/LibreChat
+    type: application
+    urls:
+    - https://github.com/hajowieland/charts/releases/download/librechat-1.1.0/librechat-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Removed exporter in wait initContainer
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/hajowieland/charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: 9C4A952752AF51FD4E5FFBB4A23CFE514438886F
+        url: https://charts.wieland.tech/public.key
+    apiVersion: v2
+    appVersion: v0.7.8
     created: "2025-05-26T14:52:04.550081503Z"
     dependencies:
     - alias: exporter
@@ -341,4 +391,4 @@ entries:
     urls:
     - https://github.com/hajowieland/charts/releases/download/web-check-1.0.0/web-check-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-30T13:20:52.473888494Z"
+generated: "2026-01-25T13:56:43.344926816Z"
