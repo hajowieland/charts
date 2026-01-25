@@ -10,25 +10,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -49,61 +45,51 @@
           "properties": {
             "CHUNK_OVERLAP": {
               "default": "100",
-              "required": [],
               "title": "CHUNK_OVERLAP",
               "type": "string"
             },
             "CHUNK_SIZE": {
               "default": "1500",
-              "required": [],
               "title": "CHUNK_SIZE",
               "type": "string"
             },
             "COLLECTION_NAME": {
               "default": "testcollection",
-              "required": [],
               "title": "COLLECTION_NAME",
               "type": "string"
             },
             "CONSOLE_JSON": {
               "default": "True",
-              "required": [],
               "title": "CONSOLE_JSON",
               "type": "string"
             },
             "DEBUG_RAG_API": {
               "default": "False",
-              "required": [],
               "title": "DEBUG_RAG_API",
               "type": "string"
             },
             "EMBEDDINGS_MODEL": {
               "default": "text-embedding-3-small",
-              "required": [],
               "title": "EMBEDDINGS_MODEL",
               "type": "string"
             },
             "EMBEDDINGS_PROVIDER": {
               "default": "openai",
-              "required": [],
               "title": "EMBEDDINGS_PROVIDER",
               "type": "string"
             },
             "PDF_EXTRACT_IMAGES": {
               "default": "False",
-              "required": [],
               "title": "PDF_EXTRACT_IMAGES",
               "type": "string"
             },
             "RAG_USE_FULL_CONTEXT": {
               "default": "False",
-              "required": [],
               "title": "RAG_USE_FULL_CONTEXT",
               "type": "string"
             },
             "VECTOR_DB_TYPE": {
               "default": "pgvector",
-              "required": [],
               "title": "VECTOR_DB_TYPE",
               "type": "string"
             }
@@ -130,7 +116,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "secretKeyRef",
               "type": "array"
             }
@@ -151,7 +136,6 @@
     },
     "fullnameOverride": {
       "default": "",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -165,20 +149,17 @@
       "properties": {
         "pullPolicy": {
           "default": "Always",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "repository": {
           "default": "ghcr.io/danny-avila/librechat-rag-api-dev-lite",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "latest",
           "description": "Overrides the image tag whose default is the chart appVersion.",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -195,7 +176,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -208,13 +188,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -226,7 +204,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -237,13 +214,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -257,7 +232,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -271,7 +245,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -279,7 +252,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -300,13 +272,11 @@
           "properties": {
             "path": {
               "default": "/health",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -327,7 +297,6 @@
     },
     "nameOverride": {
       "default": "",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -340,31 +309,26 @@
       "properties": {
         "accessMode": {
           "default": "ReadWriteOnce",
-          "required": [],
           "title": "accessMode",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "existingClaim": {
           "default": "",
-          "required": [],
           "title": "existingClaim",
           "type": "string"
         },
         "size": {
           "default": "10Gi",
-          "required": [],
           "title": "size",
           "type": "string"
         },
         "storageClass": {
           "default": "",
-          "required": [],
           "title": "storageClass",
           "type": "string"
         }
@@ -398,45 +362,38 @@
       "properties": {
         "dbnameKey": {
           "default": "dbname",
-          "required": [],
           "title": "dbnameKey",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "hostKey": {
           "default": "host",
-          "required": [],
           "title": "hostKey",
           "type": "string"
         },
         "passwordKey": {
           "default": "",
           "description": "if empty, set POSTGRES_PASSWORD in .config.env - or get superuser password from .config.secretKeyRef and set name: POSTGRES_PASSWORD",
-          "required": [],
           "title": "passwordKey",
           "type": "string"
         },
         "portKey": {
           "default": "port",
-          "required": [],
           "title": "portKey",
           "type": "string"
         },
         "secretName": {
           "default": "",
-          "required": [],
           "title": "secretName",
           "type": "string"
         },
         "userKey": {
           "default": "",
           "description": "# if empty, set POSTGRES_USER in .config.env",
-          "required": [],
           "title": "userKey",
           "type": "string"
         }
@@ -459,13 +416,11 @@
           "properties": {
             "path": {
               "default": "/health",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -486,7 +441,6 @@
     },
     "replicaCount": {
       "default": 1,
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -504,13 +458,11 @@
       "properties": {
         "port": {
           "default": 8000,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -533,21 +485,18 @@
         "automount": {
           "default": true,
           "description": "Automatically mount a ServiceAccount's API credentials?",
-          "required": [],
           "title": "automount",
           "type": "boolean"
         },
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -565,7 +514,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -574,7 +522,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumeMounts",
       "type": "array"
     },
@@ -583,7 +530,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumes",
       "type": "array"
     }

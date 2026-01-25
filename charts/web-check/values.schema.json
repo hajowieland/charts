@@ -10,25 +10,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -49,38 +45,32 @@
             "API_CORS_ORIGIN": {
               "default": "*",
               "description": "Full list of possible values\nhttps://github.com/Lissy93/web-check/blob/master/.env",
-              "required": [],
               "title": "API_CORS_ORIGIN",
               "type": "string"
             },
             "API_ENABLE_RATE_LIMIT": {
               "default": "false",
-              "required": [],
               "title": "API_ENABLE_RATE_LIMIT",
               "type": "string"
             },
             "API_TIMEOUT_LIMIT": {
               "default": "60000",
-              "required": [],
               "title": "API_TIMEOUT_LIMIT",
               "type": "string"
             },
             "DISABLE_GUI": {
               "default": "false",
-              "required": [],
               "title": "DISABLE_GUI",
               "type": "string"
             },
             "ENABLE_ANALYTICS": {
               "default": "false",
-              "required": [],
               "title": "ENABLE_ANALYTICS",
               "type": "string"
             },
             "PUPPETEER_EXECUTABLE_PATH": {
               "default": "/usr/bin/chromium",
               "description": "see: https://github.com/Lissy93/web-check/issues/108#issuecomment-2307696851",
-              "required": [],
               "title": "PUPPETEER_EXECUTABLE_PATH",
               "type": "string"
             }
@@ -103,7 +93,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "secretKeyRef",
               "type": "array"
             }
@@ -124,7 +113,6 @@
     },
     "fullnameOverride": {
       "default": "",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -138,20 +126,17 @@
       "properties": {
         "pullPolicy": {
           "default": "Always",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "repository": {
           "default": "ghcr.io/lissy93/web-check",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "latest",
           "description": "Overrides the image tag whose default is the chart appVersion.",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -168,7 +153,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -181,13 +165,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -199,7 +181,6 @@
                 "properties": {
                   "host": {
                     "default": "web-check.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -210,13 +191,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -230,7 +209,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -244,7 +222,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -252,7 +229,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -273,13 +249,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -300,7 +274,6 @@
     },
     "nameOverride": {
       "default": "",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -330,13 +303,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -357,7 +328,6 @@
     },
     "replicaCount": {
       "default": 1,
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -375,13 +345,11 @@
       "properties": {
         "port": {
           "default": 3000,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -404,21 +372,18 @@
         "automount": {
           "default": false,
           "description": "Automatically mount a ServiceAccount's API credentials?",
-          "required": [],
           "title": "automount",
           "type": "boolean"
         },
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -436,7 +401,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -445,7 +409,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumeMounts",
       "type": "array"
     },
@@ -454,7 +417,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumes",
       "type": "array"
     }
