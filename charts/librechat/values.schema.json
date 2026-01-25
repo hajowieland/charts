@@ -10,25 +10,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -49,25 +45,21 @@
             "ALLOW_EMAIL_LOGIN": {
               "default": "true",
               "description": "Full list of possible values\nhttps://github.com/danny-avila/LibreChat/blob/main/.env.example",
-              "required": [],
               "title": "ALLOW_EMAIL_LOGIN",
               "type": "string"
             },
             "ALLOW_REGISTRATION": {
               "default": "false",
-              "required": [],
               "title": "ALLOW_REGISTRATION",
               "type": "string"
             },
             "ALLOW_SOCIAL_LOGIN": {
               "default": "false",
-              "required": [],
               "title": "ALLOW_SOCIAL_LOGIN",
               "type": "string"
             },
             "ALLOW_SOCIAL_REGISTRATION": {
               "default": "false",
-              "required": [],
               "title": "ALLOW_SOCIAL_REGISTRATION",
               "type": "string"
             }
@@ -88,7 +80,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "secretKeyRef",
               "type": "array"
             }
@@ -102,7 +93,6 @@
         "externalDomain": {
           "default": "",
           "description": "sets DOMAIN_CLIENT and DOMAIN_SERVER, should be the external URL like https://chat.example.com",
-          "required": [],
           "title": "externalDomain",
           "type": "string"
         },
@@ -111,7 +101,6 @@
           "properties": {
             "version": {
               "default": "1.2.5",
-              "required": [],
               "title": "version",
               "type": "string"
             }
@@ -136,7 +125,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -149,7 +137,6 @@
     },
     "fullnameOverride": {
       "default": "",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -161,22 +148,25 @@
     },
     "image": {
       "properties": {
+        "digest": {
+          "default": "",
+          "description": "Image digest (takes precedence over tag)",
+          "title": "digest",
+          "type": "string"
+        },
         "pullPolicy": {
           "default": "IfNotPresent",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "repository": {
           "default": "ghcr.io/danny-avila/librechat",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "",
           "description": "Overrides the image tag whose default is the chart appVersion.",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -184,7 +174,8 @@
       "required": [
         "repository",
         "pullPolicy",
-        "tag"
+        "tag",
+        "digest"
       ],
       "title": "image",
       "type": "object"
@@ -193,7 +184,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -206,13 +196,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -224,7 +212,6 @@
                 "properties": {
                   "host": {
                     "default": "chat.example.com",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -235,13 +222,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -255,7 +240,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -269,7 +253,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -277,7 +260,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -298,13 +280,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -318,13 +298,11 @@
         },
         "initialDelaySeconds": {
           "default": 15,
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 3,
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -341,7 +319,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -349,13 +326,11 @@
           "properties": {
             "MEILI_ENV": {
               "default": "production",
-              "required": [],
               "title": "MEILI_ENV",
               "type": "string"
             },
             "MEILI_NO_ANALYTICS": {
               "default": false,
-              "required": [],
               "title": "MEILI_NO_ANALYTICS",
               "type": "boolean"
             }
@@ -371,7 +346,6 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -393,7 +367,6 @@
     },
     "nameOverride": {
       "default": "",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -401,7 +374,6 @@
       "properties": {
         "enabled": {
           "default": true,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -436,7 +408,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -453,13 +424,11 @@
           "properties": {
             "path": {
               "default": "/",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "port": {
               "default": "http",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -473,13 +442,11 @@
         },
         "initialDelaySeconds": {
           "default": 15,
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 3,
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -494,7 +461,6 @@
     },
     "replicaCount": {
       "default": 1,
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -507,7 +473,6 @@
       "properties": {
         "applicationName": {
           "default": "librechat-sandpack",
-          "required": [],
           "title": "applicationName",
           "type": "string"
         },
@@ -517,13 +482,11 @@
               "properties": {
                 "readOnlyRootFilesystem": {
                   "default": false,
-                  "required": [],
                   "title": "readOnlyRootFilesystem",
                   "type": "boolean"
                 },
                 "runAsNonRoot": {
                   "default": false,
-                  "required": [],
                   "title": "runAsNonRoot",
                   "type": "boolean"
                 }
@@ -539,19 +502,16 @@
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "repository": {
                   "default": "ghcr.io/librechat-ai/codesandbox-client/bundler",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "latest",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -568,7 +528,6 @@
               "properties": {
                 "enabled": {
                   "default": true,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
@@ -576,19 +535,16 @@
                   "properties": {
                     "path": {
                       "default": "/",
-                      "required": [],
                       "title": "path",
                       "type": "string"
                     },
                     "port": {
                       "default": "http",
-                      "required": [],
                       "title": "port",
                       "type": "string"
                     },
                     "scheme": {
                       "default": "HTTP",
-                      "required": [],
                       "title": "scheme",
                       "type": "string"
                     }
@@ -616,19 +572,16 @@
                     "properties": {
                       "containerPort": {
                         "default": 80,
-                        "required": [],
                         "title": "containerPort",
                         "type": "integer"
                       },
                       "name": {
                         "default": "http",
-                        "required": [],
                         "title": "name",
                         "type": "string"
                       },
                       "protocol": {
                         "default": "TCP",
-                        "required": [],
                         "title": "protocol",
                         "type": "string"
                       }
@@ -643,7 +596,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "ports",
               "type": "array"
             },
@@ -651,7 +603,6 @@
               "properties": {
                 "enabled": {
                   "default": true,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
@@ -659,19 +610,16 @@
                   "properties": {
                     "path": {
                       "default": "/",
-                      "required": [],
                       "title": "path",
                       "type": "string"
                     },
                     "port": {
                       "default": "http",
-                      "required": [],
                       "title": "port",
                       "type": "string"
                     },
                     "scheme": {
                       "default": "HTTP",
-                      "required": [],
                       "title": "scheme",
                       "type": "string"
                     }
@@ -705,7 +653,6 @@
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -718,25 +665,21 @@
                     "properties": {
                       "name": {
                         "default": "http",
-                        "required": [],
                         "title": "name",
                         "type": "string"
                       },
                       "port": {
                         "default": 80,
-                        "required": [],
                         "title": "port",
                         "type": "integer"
                       },
                       "protocol": {
                         "default": "TCP",
-                        "required": [],
                         "title": "protocol",
                         "type": "string"
                       },
                       "targetPort": {
                         "default": 80,
-                        "required": [],
                         "title": "targetPort",
                         "type": "integer"
                       }
@@ -752,7 +695,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "ports",
               "type": "array"
             }
@@ -781,13 +723,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -801,19 +741,16 @@
         "readOnlyRootFilesystem": {
           "default": false,
           "description": "filesystems needs to be writable - or LibreChat fails at startup",
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -831,13 +768,11 @@
       "properties": {
         "port": {
           "default": 3080,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -860,14 +795,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -884,7 +817,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -893,7 +825,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -901,19 +832,16 @@
           "properties": {
             "pullPolicy": {
               "default": "IfNotPresent",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "repository": {
               "default": "alpine/curl",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "8.12.1",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
